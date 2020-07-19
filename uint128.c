@@ -491,12 +491,3 @@ uint128_t factorial_unsigned(unsigned int f) {
 	}
 	return factorial;
 }
-
-int main() {
-	uint128_t a = factorial_unsigned(33);
-	uint128_t b = factorial_unsigned(32);
-	setDivideFirst_unsigned(&a, &b);
-	print_unsigned(&a, 0, 1);
-	system("PAUSE");
-	return 0;
-}
