@@ -101,15 +101,15 @@ char compare_unsigned(const uint128_t * arg1, const uint128_t * arg2) {
 }
 
 inline void setSubtractFirst_unsigned(uint128_t * arg1, const uint128_t * arg2) {
+	arg1->value[1] -= arg1->value[0] < arg2->value[0];
 	arg1->value[0] -= arg2->value[0];
-	arg1->value[1] -= arg1->value[0] > arg2->value[0];
 	arg1->value[1] -= arg2->value[1];
 }
 
 inline void setSubtract_unsigned(uint128_t * diff, const uint128_t * arg1, const uint128_t * arg2) {
 	diff->value[0] = arg1->value[0] - arg2->value[0];
 	diff->value[1] = arg1->value[1] - arg2->value[1];
-	diff->value[1] -= arg1->value[0] < diff->value[0];
+	diff->value[1] -= arg1->value[0] < arg2->value[0];
 }
 
 inline uint128_t subtract_unsigned(const uint128_t * arg1, const uint128_t * arg2) {
