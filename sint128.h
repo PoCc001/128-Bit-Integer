@@ -30,7 +30,7 @@ extern inline bool equals_signed(const sint128_t * arg1, const sint128_t * arg2)
 
 extern inline bool notEquals_signed(const sint128_t * arg1, const sint128_t * arg2);
 
-extern char compare_signed(const sint128_t * arg1, const sint128_t * arg2);
+extern int compare_signed(const sint128_t * arg1, const sint128_t * arg2);
 
 extern inline void setSubtractFirst_signed(sint128_t * arg1, const sint128_t * arg2);
 
