@@ -88,7 +88,7 @@ inline bool notEquals_unsigned(const uint128_t * arg1, const uint128_t * arg2) {
 	return !equals_unsigned(arg1, arg2);
 }
 
-char compare_unsigned(const uint128_t * arg1, const uint128_t * arg2) {
+int compare_unsigned(const uint128_t * arg1, const uint128_t * arg2) {
 	if (equals_unsigned(arg1, arg2)) {
 		return 0;
 	}
