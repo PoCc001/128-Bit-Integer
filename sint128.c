@@ -70,7 +70,7 @@ inline bool notEquals_signed(const sint128_t * arg1, const sint128_t * arg2) {
 	return notEquals_unsigned(&arg1->value, &arg2->value);
 }
 
-char compare_signed(const sint128_t * arg1, const sint128_t * arg2) {
+int compare_signed(const sint128_t * arg1, const sint128_t * arg2) {
 	if (equals_signed(arg1, arg2)) {
 		return 0;
 	}
