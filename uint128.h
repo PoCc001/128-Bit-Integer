@@ -50,7 +50,7 @@ extern inline bool equals_unsigned(const uint128_t * arg1, const uint128_t * arg
 
 extern inline bool notEquals_unsigned(const uint128_t * arg1, const uint128_t * arg2);
 
-extern char compare_unsigned(const uint128_t * arg1, const uint128_t * arg2);
+extern int compare_unsigned(const uint128_t * arg1, const uint128_t * arg2);
 
 extern inline void setSubtractFirst_unsigned(uint128_t * arg1, const uint128_t * arg2);
 
