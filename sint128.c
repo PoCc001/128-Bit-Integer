@@ -334,7 +334,6 @@ inline bool getDigit_signed(const sint128_t * arg, unsigned int d, bool twoscomp
 	}
 }
 
-// almost all errors are gone
 char * toBinaryString_signed(const sint128_t * arg, bool twoscomplement) {
 	if (!isNegative(arg)) {
 		return toBinaryString_unsigned(&arg->value);
