@@ -110,4 +110,12 @@ extern inline sint128_t fibonacci_signed(unsigned int f);
 
 extern inline sint128_t factorial_signed(unsigned int f);
 
+extern inline unsigned int getBitLength_signed(const sint128_t * arg, bool twoscomplement);
+
+extern inline bool getDigit_signed(const sint128_t * arg, unsigned int d, bool twoscomplement);
+
+extern char * toBinaryString_signed(const sint128_t * arg, bool twoscomplement);
+
+extern inline void print_signed(const sint128_t * arg, bool twoscomplement, bool breakBefore, bool breakAfter);
+
 #endif

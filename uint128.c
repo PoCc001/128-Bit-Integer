@@ -128,7 +128,7 @@ inline static void setShiftOneLeftArg_unsigned(uint128_t * arg) {
 
 inline static void setShiftOneRightArg_unsigned(uint128_t * arg) {
 	arg->value[0] >>= 1;
-	if (arg->value[1] % 2 == 1) {
+	if (arg->value[1] & 1) {
 		arg->value[1] += 0x8000000000000000;
 	}
 	arg->value[1] >>= 1;
@@ -145,7 +145,7 @@ inline static void setShiftOneLeft_unsigned(uint128_t * shifted, const uint128_t
 inline static void setShiftOneRight_unsigned(uint128_t * shifted, const uint128_t * arg) {
 	shifted->value[1] = arg->value[1] >> 1;
 	shifted->value[0] = arg->value[0] >> 1;
-	if (arg->value[1] % 2 == 1) {
+	if (arg->value[1] & 1) {
 		shifted->value[1] += 0x8000000000000000;
 	}
 }
@@ -368,29 +368,6 @@ uint128_t multiply_unsigned(const uint128_t * arg1, const uint128_t * arg2) {
 	return prod;
 }
 
-void print_unsigned(const uint128_t * arg, bool breakBefore, bool breakAfter) {
-	unsigned int l = getBitLength_unsigned(arg);
-	if (breakBefore) {
-		printf("\n");
-	}
-	if (l == 0) {
-		printf("0");
-	}
-	else {
-		for (unsigned int i = l; i > 0; --i) {
-			if (getDigit_unsigned(arg, i - 1)) {
-				printf("1");
-			}
-			else {
-				printf("0");
-			}
-		}
-	}
-	if (breakAfter) {
-		printf("\n");
-	}
-}
-
 char * toBinaryString_unsigned(const uint128_t * arg) {
 	unsigned int l = getBitLength_unsigned(arg);
 	if (l == 0) {
@@ -408,6 +385,18 @@ char * toBinaryString_unsigned(const uint128_t * arg) {
 		}
 	}
 	return val;
+}
+
+inline void print_unsigned(uint128_t * arg, bool breakBefore, bool breakAfter) {
+	if (breakBefore) {
+		printf("\n");
+	}
+
+	printf(toBinaryString_unsigned(arg));
+
+	if (breakAfter) {
+		printf("\n");
+	}
 }
 
 inline void setInvertBits_unsigned(uint128_t * inverted, const uint128_t * arg) {

@@ -1,6 +1,8 @@
 #include "uint128.h"
 #include "sint128.h"
 #include <stdbool.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 inline void setAddFirst_signed(sint128_t * arg1, const sint128_t * arg2) {
 	setAddFirst_unsigned(&arg1->value, &arg2->value);
@@ -305,4 +307,72 @@ inline sint128_t factorial_signed(unsigned int f) {
 	sint128_t factorial;
 	factorial.value = factorial_unsigned(f);
 	return factorial;
+}
+
+inline unsigned int getBitLength_signed(const sint128_t * arg, bool twoscomplement) {
+	if (twoscomplement) {
+		return getBitLength_unsigned(&arg->value);
+	}
+	else {
+		sint128_t n = negate(arg);
+		return getBitLength_unsigned(&n.value);
+	}
+}
+
+inline bool getDigit_signed(const sint128_t * arg, unsigned int d, bool twoscomplement) {
+	if (twoscomplement) {
+		return getDigit_unsigned(&arg->value, d);
+	}
+	else {
+		if (!isNegative(arg)) {
+			return getDigit_unsigned(&arg->value, d);
+		}
+		else {
+			sint128_t absArg = negate(arg);
+			return getDigit_unsigned(&absArg.value, d);
+		}
+	}
+}
+
+// almost all errors are gone
+char * toBinaryString_signed(const sint128_t * arg, bool twoscomplement) {
+	if (!isNegative(arg)) {
+		return toBinaryString_unsigned(&arg->value);
+	}
+	else {
+		if (twoscomplement) {
+			return toBinaryString_unsigned(&arg->value);
+		}
+		else {
+			unsigned int l = getBitLength_signed(arg, 0);
+			if (l == 0) {
+				return "0";
+			}
+
+			char * val = (char *)(malloc(l + 2));
+
+			val[0] = '-';
+			val[l + 1] = '\0';
+			for (unsigned int i = l; i > 0; --i) {
+				if (getDigit_signed(arg, i - 1, 0)) {
+					val[l - i + 1] = '1';
+				}
+				else {
+					val[l - i + 1] = '0';
+				}
+			}
+			return val;
+		}
+	}
+}
+
+inline void print_signed(const sint128_t * arg, bool twoscomplement, bool breakBefore, bool breakAfter) {
+	if (breakBefore) {
+		printf("\n");
+	}
+	printf(toBinaryString_signed(arg, twoscomplement));
+
+	if (breakAfter) {
+		printf("\n");
+	}
 }

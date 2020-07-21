@@ -3,15 +3,6 @@
 
 #include <stdbool.h>
 
-/*#ifdef WIN64
-#define OS_TYPE 0
-#elif defined(WIN32)
-#define OS_TYPE 1
-#else
-#define OS_TYPE 2
-#endif */
-
-//#pragma pack(1)
 typedef struct unsigned_int_128 {
 	unsigned long long value[2];
 } uint128_t;
@@ -96,7 +87,7 @@ extern void setMultiplyFirst_unsigned(uint128_t * arg1, const uint128_t * arg2);
 
 extern uint128_t multiply_unsigned(const uint128_t * arg1, const uint128_t * arg2);
 
-extern void print_unsigned(const uint128_t * arg, bool breakBefore, bool breakAfter);
+extern inline void print_unsigned(const uint128_t * arg, bool breakBefore, bool breakAfter);
 
 extern char * toBinaryString_unsigned(const uint128_t * arg);
 
