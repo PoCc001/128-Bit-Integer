@@ -28,6 +28,10 @@ inline sint128_t valueOfLLs(long long value1, long long value2) {
 	return new_number;
 }
 
+inline long long toLL(const sint128_t * arg) {
+	return (long long)(arg->value.value[0]);
+}
+
 inline static bool lastBit(const sint128_t * arg) {
 	return arg->value.value[1] & 0x8000000000000000;
 }

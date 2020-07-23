@@ -18,6 +18,8 @@ extern inline void assignValue_signed(sint128_t * number, long long value1, long
 
 extern inline sint128_t valueOfLLs(long long value1, long long value2);
 
+extern inline long long toLL(const sint128_t * arg);
+
 extern inline bool isLargerThan_signed(const sint128_t * arg1, const sint128_t * arg2);
 
 extern inline bool isSmallerThan_signed(const sint128_t * arg1, const sint128_t * arg2);

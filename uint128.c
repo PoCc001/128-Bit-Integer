@@ -64,6 +64,10 @@ inline uint128_t valueOfULLs(unsigned long long value1, unsigned long long value
 	return number;
 }
 
+inline unsigned long long toULL(const uint128_t * arg) {
+	return arg->value[0];
+}
+
 inline bool isLargerThan_unsigned(const uint128_t * arg1, const uint128_t * arg2) {
 	return arg1->value[1] > arg2->value[1] || (arg1->value[1] == arg2->value[1] && arg1->value[0] > arg2->value[0]);
 }
@@ -387,7 +391,7 @@ char * toBinaryString_unsigned(const uint128_t * arg) {
 	return val;
 }
 
-inline void print_unsigned(uint128_t * arg, bool breakBefore, bool breakAfter) {
+inline void print_unsigned(const uint128_t * arg, bool breakBefore, bool breakAfter) {
 	if (breakBefore) {
 		printf("\n");
 	}

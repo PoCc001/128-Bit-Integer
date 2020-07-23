@@ -29,6 +29,8 @@ extern inline void assignValue_unsigned(uint128_t * number, unsigned long long v
 
 extern inline uint128_t valueOfULLs(unsigned long long value1, unsigned long long value2);
 
+extern inline unsigned long long toULL(const uint128_t * arg);
+
 extern inline bool isLargerThan_unsigned(const uint128_t * arg1, const uint128_t * arg2);
 
 extern inline bool isSmallerThan_unsigned(const uint128_t * arg1, const uint128_t * arg2);
