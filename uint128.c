@@ -22,12 +22,12 @@ inline uint128_t add_unsigned(const uint128_t * arg1, const uint128_t * arg2) {
 }
 
 inline void increment_unsigned(uint128_t * arg) {
-	arg->value[0] += 1;
+	++arg->value[0];
 	arg->value[1] += arg->value[0] == 0;
 }
 
 inline void decrement_unsigned(uint128_t * arg) {
-	arg->value[0] -= 1;
+	--arg->value[0];
 	arg->value[1] -= arg->value[0] == 0xffffffffffffffff;
 }
 
