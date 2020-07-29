@@ -189,13 +189,13 @@ inline void setShift_unsigned(uint128_t * shifted, const uint128_t * arg, int of
 
 	if (off > 0) {
 		setShiftOneLeft_unsigned(shifted, arg);
-		for (int i = 0; i < off; ++i) {
+		for (int i = 1; i < off; ++i) {
 			setShiftOneLeftArg_unsigned(shifted);
 		}
 	}
 	else {
 		setShiftOneRight_unsigned(shifted, arg);
-		for (int i = 0; i < off; ++i) {
+		for (int i = 1; i < off; ++i) {
 			setShiftOneRightArg_unsigned(shifted);
 		}
 	}
@@ -205,6 +205,71 @@ uint128_t shift_unsigned(const uint128_t * arg, int off) {
 	uint128_t shifted;
 	setShift_unsigned(&shifted, arg, off);
 	return shifted;
+}
+
+inline static void setRotateOneLeft_unsigned(uint128_t * rot, const uint128_t * arg) {
+	setShiftOneLeft_unsigned(rot, arg);
+	rot->value[0] |= (arg->value[1] & 0x8000000000000000) != 0;
+}
+
+inline static void setRotateOneRight_unsigned(uint128_t * rot, const uint128_t * arg) {
+	setShiftOneRight_unsigned(rot, arg);
+	rot->value[1] |= (arg->value[0] & 1) << 63;
+}
+
+inline static void setRotateOneLeftArg_unsigned(uint128_t * arg) {
+	bool overflow = arg->value[1] & 0x8000000000000000;
+	setShiftOneLeftArg_unsigned(arg);
+	arg->value[0] |= overflow;
+}
+
+inline static void setRotateOneRightArg_unsigned(uint128_t * arg) {
+	bool odd = arg->value[0] & 1;
+	setShiftOneRightArg_unsigned(arg);
+	arg->value[1] |= (unsigned long long)(odd) << 63;
+}
+
+inline void setRotate_unsigned(uint128_t * rot, const uint128_t * arg, int off) {
+	if ((off & 0xff) == 0) {
+		*rot = *arg;
+		return;
+	}
+
+	if (off > 0) {
+		off &= 0xff;
+		setRotateOneLeft_unsigned(rot, arg);
+		for (int i = 1; i < off; ++i) {
+			setRotateOneLeftArg_unsigned(rot);
+		}
+	}
+	else {
+		off = (-off) &0xff;
+		setRotateOneRight_unsigned(rot, arg);
+		for (int i = 1; i < off; ++i) {
+			setRotateOneRightArg_unsigned(rot);
+		}
+	}
+}
+
+inline void setRotateArg_unsigned(uint128_t * arg, int off) {
+	if (off >= 0) {
+		off &= 0xff;
+		for (int i = 0; i < off; ++i) {
+			setRotateOneLeftArg_unsigned(arg);
+		}
+	}
+	else {
+		off = (-off) & 0xff;
+		for (int i = 0; i < off; ++i) {
+			setRotateOneRightArg_unsigned(arg);
+		}
+	}
+}
+
+uint128_t rotate_unsigned(const uint128_t * arg, int off) {
+	uint128_t rot;
+	setRotate_unsigned(&rot, arg, off);
+	return rot;
 }
 
 inline void setBWAnd_unsigned(uint128_t * and, const uint128_t * arg1, const uint128_t * arg2) {
@@ -256,15 +321,7 @@ inline uint128_t bwXor_unsigned(const uint128_t * arg1, const uint128_t * arg2) 
 }
 
 inline bool getDigit_unsigned(const uint128_t * arg, unsigned int d) {
-	if (d >= 128) {
-		return 0;
-	}
-	else if (d < 64) {
-		return arg->value[0] & (1ULL << d);
-	}
-	else {
-		return arg->value[1] & (1ULL << (d - 64));
-	}
+	return d < 64 ? (arg->value[0] & (1ULL << d)) : (arg->value[1] & (1ULL << (d - 64)));
 }
 
 inline void setDigitArg_unsigned(uint128_t * arg, unsigned int i, bool d) {
@@ -483,4 +540,19 @@ uint128_t factorial_unsigned(unsigned int f) {
 		setMultiplyFirst_unsigned(&factorial, &factor);
 	}
 	return factorial;
+}
+
+inline void printHex_unsigned(const uint128_t * arg, bool breakBefore, bool breakAfter) {
+	if (breakBefore) {
+		printf("\n");
+	}
+
+	if (arg->value[1] != 0) {
+		printf("%llx", arg->value[1]);
+	}
+	printf("%llx", arg->value[0]);
+
+	if (breakAfter) {
+		printf("\n");
+	}
 }

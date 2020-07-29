@@ -103,17 +103,34 @@ inline sint128_t subtract_signed(const sint128_t * arg1, const sint128_t * arg2)
 }
 
 inline void setShiftArg_signed(sint128_t * arg, int off) {
+	bool isNeg = isNegative(arg);
 	setShiftArg_unsigned(&arg->value, off);
+	arg->value.value[1] |= (unsigned long long)(isNeg) << 63;
 }
 
 inline void setShift_signed(sint128_t * shifted, const sint128_t * arg, int off) {
 	setShift_unsigned(&shifted->value, &arg->value, off);
+	shifted->value.value[1] |= (unsigned long long)(isNegative(arg)) << 63;
 }
 
 sint128_t shift_signed(const sint128_t * arg, int off) {
 	sint128_t shifted;
 	setShift_signed(&shifted, arg, off);
 	return shifted;
+}
+
+inline void setRotate_signed(sint128_t * rot, const sint128_t * arg, int off) {
+	setRotate_unsigned(&rot->value, &arg->value, off);
+}
+
+inline void setRotateArg_signed(sint128_t * arg, int off) {
+	setRotateArg_unsigned(&arg->value, off);
+}
+
+sint128_t rotate_signed(const sint128_t * arg, int off) {
+	sint128_t rot;
+	setRotate_signed(&rot, arg, off);
+	return rot;
 }
 
 inline void setBWAnd_signed(sint128_t * and, const sint128_t * arg1, const sint128_t * arg2) {
@@ -373,7 +390,30 @@ inline void print_signed(const sint128_t * arg, bool twoscomplement, bool breakB
 	if (breakBefore) {
 		printf("\n");
 	}
+
 	printf(toBinaryString_signed(arg, twoscomplement));
+
+	if (breakAfter) {
+		printf("\n");
+	}
+}
+
+inline void printHex_signed(const sint128_t * arg, bool twoscomplement, bool breakBefore, bool breakAfter) {
+	if (breakBefore) {
+		printf("\n");
+	}
+
+	if (twoscomplement || !isNegative(arg)) {
+		printHex_unsigned(&arg->value, 0, 0);
+	}
+	else {
+		sint128_t neg = negate(arg);
+		printf("-");
+		if (neg.value.value[1] != 0) {
+			printf("%llx", neg.value.value[1]);
+		}
+		printf("%llx", neg.value.value[0]);
+	}
 
 	if (breakAfter) {
 		printf("\n");

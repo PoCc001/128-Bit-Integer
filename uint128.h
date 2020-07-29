@@ -57,6 +57,12 @@ extern inline void setShift_unsigned(uint128_t * shifted, const uint128_t * arg,
 
 extern uint128_t shift_unsigned(const uint128_t * arg, int off);
 
+extern inline void setRotate_unsigned(uint128_t * rot, const uint128_t * arg, int off);
+
+extern inline void setRotateArg_unsigned(uint128_t * arg, int off);
+
+extern uint128_t rotate_unsigned(const uint128_t * arg, int off);
+
 extern inline void setBWAnd_unsigned(uint128_t * and, const uint128_t * arg1, const uint128_t * arg2);
 
 extern inline void setBWAndFirst_unsigned(uint128_t * arg1, const uint128_t * arg2);
@@ -108,5 +114,7 @@ extern inline uint128_t divide_unsigned(const uint128_t * arg1, const uint128_t 
 extern uint128_t fibonacci_unsigned(unsigned int f);
 
 extern uint128_t factorial_unsigned(unsigned int f);
+
+extern inline void printHex_unsigned(const uint128_t * arg, bool breakBefore, bool breakAfter);
 
 #endif

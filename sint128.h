@@ -46,6 +46,12 @@ extern inline void setShift_signed(sint128_t * shifted, const sint128_t * arg, i
 
 extern sint128_t shift_signed(const sint128_t * arg, int off);
 
+extern inline void setRotate_signed(sint128_t * rot, const sint128_t * arg, int off);
+
+extern inline void setRotateArg_signed(sint128_t * arg, int off);
+
+extern sint128_t rotate_signed(const sint128_t * arg, int off);
+
 extern inline void setBWAnd_signed(sint128_t * and, const sint128_t * arg1, const sint128_t * arg2);
 
 extern  void setBWAndFirst_signed(sint128_t * arg1, const sint128_t * arg2);
@@ -119,5 +125,7 @@ extern inline bool getDigit_signed(const sint128_t * arg, unsigned int d, bool t
 extern char * toBinaryString_signed(const sint128_t * arg, bool twoscomplement);
 
 extern inline void print_signed(const sint128_t * arg, bool twoscomplement, bool breakBefore, bool breakAfter);
+
+extern inline void printHex_signed(const sint128_t * arg, bool twoscomplement, bool breakBefore, bool breakAfter);
 
 #endif
