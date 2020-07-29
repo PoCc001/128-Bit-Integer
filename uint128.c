@@ -230,20 +230,20 @@ inline static void setRotateOneRightArg_unsigned(uint128_t * arg) {
 }
 
 inline void setRotate_unsigned(uint128_t * rot, const uint128_t * arg, int off) {
-	if ((off & 0xff) == 0) {
+	if ((off & 0x80) == 0) {
 		*rot = *arg;
 		return;
 	}
 
 	if (off > 0) {
-		off &= 0xff;
+		off &= 0x80;
 		setRotateOneLeft_unsigned(rot, arg);
 		for (int i = 1; i < off; ++i) {
 			setRotateOneLeftArg_unsigned(rot);
 		}
 	}
 	else {
-		off = (-off) &0xff;
+		off = (-off) &0x80;
 		setRotateOneRight_unsigned(rot, arg);
 		for (int i = 1; i < off; ++i) {
 			setRotateOneRightArg_unsigned(rot);
@@ -253,13 +253,13 @@ inline void setRotate_unsigned(uint128_t * rot, const uint128_t * arg, int off) 
 
 inline void setRotateArg_unsigned(uint128_t * arg, int off) {
 	if (off >= 0) {
-		off &= 0xff;
+		off &= 0x80;
 		for (int i = 0; i < off; ++i) {
 			setRotateOneLeftArg_unsigned(arg);
 		}
 	}
 	else {
-		off = (-off) & 0xff;
+		off = (-off) & 0x80;
 		for (int i = 0; i < off; ++i) {
 			setRotateOneRightArg_unsigned(arg);
 		}
