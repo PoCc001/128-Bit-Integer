@@ -2,6 +2,7 @@
 #define SINT128_HPP
 
 #include <string>
+// using the definitions of the operations from uint128.h to just call them in wrapper functions
 extern "C" {
 	#include "sint128.h"
 }
