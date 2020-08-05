@@ -133,8 +133,8 @@ sint128_t rotate_signed(const sint128_t * arg, int off) {
 	return rot;
 }
 
-inline void setBWAnd_signed(sint128_t * and, const sint128_t * arg1, const sint128_t * arg2) {
-	setBWAnd_unsigned(&and->value, &arg1->value, &arg2->value);
+inline void setBWAnd_signed(sint128_t * bwand, const sint128_t * arg1, const sint128_t * arg2) {
+	setBWAnd_unsigned(&bwand->value, &arg1->value, &arg2->value);
 }
 
 inline void setBWAndFirst_signed(sint128_t * arg1, const sint128_t * arg2) {
@@ -147,8 +147,8 @@ inline sint128_t bwAnd_signed(const sint128_t * arg1, const sint128_t * arg2) {
 	return bw_and;
 }
 
-inline void setBWOr_signed(sint128_t * or, const sint128_t * arg1, const sint128_t * arg2) {
-	setBWOr_unsigned(&or->value, &arg1->value, &arg2->value);
+inline void setBWOr_signed(sint128_t * bwor, const sint128_t * arg1, const sint128_t * arg2) {
+	setBWOr_unsigned(&bwor->value, &arg1->value, &arg2->value);
 }
 
 inline void setBWOrFirst_signed(sint128_t * arg1, const sint128_t * arg2) {
@@ -161,8 +161,8 @@ inline sint128_t bwOr_signed(const sint128_t * arg1, const sint128_t * arg2) {
 	return bw_or;
 }
 
-inline void setBWXor_signed(sint128_t * xor, const sint128_t * arg1, const sint128_t * arg2) {
-	setBWXor_unsigned(&xor->value, &arg1->value, &arg2->value);
+inline void setBWXor_signed(sint128_t * bwxor, const sint128_t * arg1, const sint128_t * arg2) {
+	setBWXor_unsigned(&bwxor->value, &arg1->value, &arg2->value);
 }
 
 inline void setBWXorFirst_signed(sint128_t * arg1, const sint128_t * arg2) {

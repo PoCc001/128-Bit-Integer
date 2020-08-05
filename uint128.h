@@ -3,118 +3,118 @@
 
 #include <stdbool.h>
 
-typedef struct unsigned_int_128 {
+typedef struct {
 	unsigned long long value[2];
 } uint128_t;
 
-extern inline void setAddFirst_unsigned(uint128_t * arg1, const uint128_t * arg2);
+extern inline void setAddFirst_unsigned(uint128_t *, const uint128_t *);
 
-extern inline void setAdd_unsigned(uint128_t * sum, const uint128_t * arg1, const uint128_t * arg2);
+extern inline void setAdd_unsigned(uint128_t *, const uint128_t *, const uint128_t *);
 
-extern inline uint128_t add_unsigned(const uint128_t * arg1, const uint128_t * arg2);
+extern inline uint128_t add_unsigned(const uint128_t *, const uint128_t *);
 
-extern inline void increment_unsigned(uint128_t * arg);
+extern inline void increment_unsigned(uint128_t *);
 
-extern inline void decrement_unsigned(uint128_t * arg);
+extern inline void decrement_unsigned(uint128_t *);
 
-extern inline uint128_t postIncrement_unsigned(uint128_t * arg);
+extern inline uint128_t postIncrement_unsigned(uint128_t *);
 
-extern inline uint128_t preIncrement_unsigned(uint128_t * arg);
+extern inline uint128_t preIncrement_unsigned(uint128_t *);
 
-extern inline uint128_t postDecrement_unsigned(uint128_t * arg);
+extern inline uint128_t postDecrement_unsigned(uint128_t *);
 
-extern inline uint128_t preDecrement_unsigned(uint128_t * arg);
+extern inline uint128_t preDecrement_unsigned(uint128_t *);
 
-extern inline void assignValue_unsigned(uint128_t * number, unsigned long long value1, unsigned long long value2);
+extern inline void assignValue_unsigned(uint128_t *, unsigned long long, unsigned long long);
 
-extern inline uint128_t valueOfULLs(unsigned long long value1, unsigned long long value2);
+extern inline uint128_t valueOfULLs(unsigned long long, unsigned long long);
 
-extern inline unsigned long long toULL(const uint128_t * arg);
+extern inline unsigned long long toULL(const uint128_t *);
 
-extern inline bool isLargerThan_unsigned(const uint128_t * arg1, const uint128_t * arg2);
+extern inline bool isLargerThan_unsigned(const uint128_t *, const uint128_t *);
 
-extern inline bool isSmallerThan_unsigned(const uint128_t * arg1, const uint128_t * arg2);
+extern inline bool isSmallerThan_unsigned(const uint128_t *, const uint128_t *);
 
-extern inline bool isLargerThanOrEqualTo_unsigned(const uint128_t * arg1, const uint128_t * arg2);
+extern inline bool isLargerThanOrEqualTo_unsigned(const uint128_t *, const uint128_t *);
 
-extern inline bool isSmallerThanOrEqualTo_unsigned(const uint128_t * arg1, const uint128_t * arg2);
+extern inline bool isSmallerThanOrEqualTo_unsigned(const uint128_t *, const uint128_t *);
 
-extern inline bool equals_unsigned(const uint128_t * arg1, const uint128_t * arg2);
+extern inline bool equals_unsigned(const uint128_t *, const uint128_t *);
 
-extern inline bool notEquals_unsigned(const uint128_t * arg1, const uint128_t * arg2);
+extern inline bool notEquals_unsigned(const uint128_t *, const uint128_t *);
 
-extern int compare_unsigned(const uint128_t * arg1, const uint128_t * arg2);
+extern int compare_unsigned(const uint128_t *, const uint128_t *);
 
-extern inline void setSubtractFirst_unsigned(uint128_t * arg1, const uint128_t * arg2);
+extern inline void setSubtractFirst_unsigned(uint128_t *, const uint128_t *);
 
-extern inline void setSubtract_unsigned(uint128_t * diff, const uint128_t * arg1, const uint128_t * arg2);
+extern inline void setSubtract_unsigned(uint128_t *, const uint128_t *, const uint128_t *);
 
-extern inline uint128_t subtract_unsigned(const uint128_t * arg1, const uint128_t * arg2);
+extern inline uint128_t subtract_unsigned(const uint128_t *, const uint128_t *);
 
-extern inline void setShiftArg_unsigned(uint128_t * arg, int off);
+extern inline void setShiftArg_unsigned(uint128_t *, int);
 
-extern inline void setShift_unsigned(uint128_t * shifted, const uint128_t * arg, int off);
+extern inline void setShift_unsigned(uint128_t *, const uint128_t *, int);
 
-extern uint128_t shift_unsigned(const uint128_t * arg, int off);
+extern uint128_t shift_unsigned(const uint128_t *, int);
 
-extern inline void setRotate_unsigned(uint128_t * rot, const uint128_t * arg, int off);
+extern inline void setRotate_unsigned(uint128_t *, const uint128_t *, int);
 
-extern inline void setRotateArg_unsigned(uint128_t * arg, int off);
+extern inline void setRotateArg_unsigned(uint128_t *, int);
 
-extern uint128_t rotate_unsigned(const uint128_t * arg, int off);
+extern uint128_t rotate_unsigned(const uint128_t *, int);
 
-extern inline void setBWAnd_unsigned(uint128_t * and, const uint128_t * arg1, const uint128_t * arg2);
+extern inline void setBWAnd_unsigned(uint128_t *, const uint128_t *, const uint128_t *);
 
-extern inline void setBWAndFirst_unsigned(uint128_t * arg1, const uint128_t * arg2);
+extern inline void setBWAndFirst_unsigned(uint128_t *, const uint128_t *);
 
-extern inline uint128_t bwAnd_unsigned(const uint128_t * arg1, const uint128_t * arg2);
+extern inline uint128_t bwAnd_unsigned(const uint128_t *, const uint128_t *);
 
-extern inline void setBWOr_unsigned(uint128_t * bwOr, const uint128_t * arg1, const uint128_t * arg2);
+extern inline void setBWOr_unsigned(uint128_t *, const uint128_t *, const uint128_t *);
 
-extern inline void setBWOrFirst_unsigned(uint128_t * arg1, const uint128_t * arg2);
+extern inline void setBWOrFirst_unsigned(uint128_t *, const uint128_t *);
 
-extern inline uint128_t bwOr_unsigned(const uint128_t * arg1, const uint128_t * arg2);
+extern inline uint128_t bwOr_unsigned(const uint128_t *, const uint128_t *);
 
-extern inline void setBWXor_unsigned(uint128_t * bwXor, const uint128_t * arg1, const uint128_t * arg2);
+extern inline void setBWXor_unsigned(uint128_t *, const uint128_t *, const uint128_t *);
 
-extern inline void setBWXorFirst_unsigned(uint128_t * arg1, const uint128_t * arg2);
+extern inline void setBWXorFirst_unsigned(uint128_t *, const uint128_t *);
 
-extern inline uint128_t bwXor_unsigned(const uint128_t * arg1, const uint128_t * arg2);
+extern inline uint128_t bwXor_unsigned(const uint128_t *, const uint128_t *);
 
-extern inline bool getDigit_unsigned(const uint128_t * arg, unsigned int d);
+extern inline bool getDigit_unsigned(const uint128_t *, unsigned int);
 
-extern inline void setDigitArg_unsigned(uint128_t * arg, unsigned int i, bool d);
+extern inline void setDigitArg_unsigned(uint128_t *, unsigned int, bool);
 
-extern inline void setDigit_unsigned(uint128_t * set, const uint128_t * arg, unsigned int i, bool d);
+extern inline void setDigit_unsigned(uint128_t * set, const uint128_t *, unsigned int, bool);
 
-extern inline unsigned int getBitLength_unsigned(const uint128_t * arg);
+extern inline unsigned int getBitLength_unsigned(const uint128_t *);
 
-extern void setMultiply_unsigned(uint128_t * prod, const uint128_t * arg1, const uint128_t * arg2);
+extern void setMultiply_unsigned(uint128_t * prod, const uint128_t *, const uint128_t *);
 
-extern void setMultiplyFirst_unsigned(uint128_t * arg1, const uint128_t * arg2);
+extern void setMultiplyFirst_unsigned(uint128_t *, const uint128_t *);
 
-extern uint128_t multiply_unsigned(const uint128_t * arg1, const uint128_t * arg2);
+extern uint128_t multiply_unsigned(const uint128_t *, const uint128_t *);
 
-extern inline void print_unsigned(const uint128_t * arg, bool breakBefore, bool breakAfter);
+extern inline void print_unsigned(const uint128_t *, bool, bool);
 
-extern char * toBinaryString_unsigned(const uint128_t * arg);
+extern char * toBinaryString_unsigned(const uint128_t *);
 
-extern inline void setInvertBits_unsigned(uint128_t * inverted, const uint128_t * arg);
+extern inline void setInvertBits_unsigned(uint128_t *, const uint128_t *);
 
-extern inline void setInvertBitsArg_unsigned(uint128_t * arg);
+extern inline void setInvertBitsArg_unsigned(uint128_t *);
 
-extern inline uint128_t invertBits_unsigned(const uint128_t * arg);
+extern inline uint128_t invertBits_unsigned(const uint128_t *);
 
-/*extern void setDivide_unsigned(uint128_t * q, const uint128_t * arg1, const uint128_t * arg2);
+/*extern void setDivide_unsigned(uint128_t *, const uint128_t *, const uint128_t *);
 
-extern void setDivideFirst_unsigned(uint128_t * arg1, const uint128_t * arg2);
+extern void setDivideFirst_unsigned(uint128_t *, const uint128_t *);
 
-extern inline uint128_t divide_unsigned(const uint128_t * arg1, const uint128_t * arg2);*/
+extern inline uint128_t divide_unsigned(const uint128_t *, const uint128_t *);*/
 
-extern uint128_t fibonacci_unsigned(unsigned int f);
+extern uint128_t fibonacci_unsigned(unsigned int);
 
-extern uint128_t factorial_unsigned(unsigned int f);
+extern uint128_t factorial_unsigned(unsigned int);
 
-extern inline void printHex_unsigned(const uint128_t * arg, bool breakBefore, bool breakAfter);
+extern inline void printHex_unsigned(const uint128_t *, bool, bool);
 
 #endif

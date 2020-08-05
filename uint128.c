@@ -243,7 +243,7 @@ inline void setRotate_unsigned(uint128_t * rot, const uint128_t * arg, int off) 
 		}
 	}
 	else {
-		off = (-off) &0x80;
+		off = (-off) &0x7f;
 		setRotateOneRight_unsigned(rot, arg);
 		for (int i = 1; i < off; ++i) {
 			setRotateOneRightArg_unsigned(rot);
@@ -272,9 +272,9 @@ uint128_t rotate_unsigned(const uint128_t * arg, int off) {
 	return rot;
 }
 
-inline void setBWAnd_unsigned(uint128_t * and, const uint128_t * arg1, const uint128_t * arg2) {
-	and->value[0] = arg1->value[0] & arg2->value[0];
-	and->value[1] = arg1->value[1] & arg2->value[1];
+inline void setBWAnd_unsigned(uint128_t * bwand, const uint128_t * arg1, const uint128_t * arg2) {
+	bwand->value[0] = arg1->value[0] & arg2->value[0];
+	bwand->value[1] = arg1->value[1] & arg2->value[1];
 }
 
 inline void setBWAndFirst_unsigned(uint128_t * arg1, const uint128_t * arg2) {
@@ -288,9 +288,9 @@ inline uint128_t bwAnd_unsigned(const uint128_t * arg1, const uint128_t * arg2) 
 	return and;
 }
 
-inline void setBWOr_unsigned(uint128_t * bwOr, const uint128_t * arg1, const uint128_t * arg2) {
-	bwOr->value[0] = arg1->value[0] | arg2->value[0];
-	bwOr->value[1] = arg1->value[1] | arg2->value[1];
+inline void setBWOr_unsigned(uint128_t * bwor, const uint128_t * arg1, const uint128_t * arg2) {
+	bwor->value[0] = arg1->value[0] | arg2->value[0];
+	bwor->value[1] = arg1->value[1] | arg2->value[1];
 }
 
 inline void setBWOrFirst_unsigned(uint128_t * arg1, const uint128_t * arg2) {
@@ -304,9 +304,9 @@ inline uint128_t bwOr_unsigned(const uint128_t * arg1, const uint128_t * arg2) {
 	return and;
 }
 
-inline void setBWXor_unsigned(uint128_t * bwXor, const uint128_t * arg1, const uint128_t * arg2) {
-	bwXor->value[0] = arg1->value[0] ^ arg2->value[0];
-	bwXor->value[1] = arg1->value[1] ^ arg2->value[1];
+inline void setBWXor_unsigned(uint128_t * bwxor, const uint128_t * arg1, const uint128_t * arg2) {
+	bwxor->value[0] = arg1->value[0] ^ arg2->value[0];
+	bwxor->value[1] = arg1->value[1] ^ arg2->value[1];
 }
 
 inline void setBWXorFirst_unsigned(uint128_t * arg1, const uint128_t * arg2) {

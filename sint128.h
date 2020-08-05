@@ -4,128 +4,128 @@
 #include "uint128.h"
 #include <stdbool.h>
 
-typedef struct signed_int_128 {
+typedef struct {
 	uint128_t value;
 } sint128_t;
 
-extern inline void setAddFirst_signed(sint128_t * arg1, const sint128_t * arg2);
+extern  void setAddFirst_signed(sint128_t *, const sint128_t *);
 
-extern inline void setAdd_signed(sint128_t * sum, const sint128_t * arg1, const sint128_t * arg2);
+extern  void setAdd_signed(sint128_t *, const sint128_t *, const sint128_t *);
 
-extern inline sint128_t add_signed(const sint128_t * arg1, const sint128_t * arg2);
+extern  sint128_t add_signed(const sint128_t *, const sint128_t *);
 
-extern inline void assignValue_signed(sint128_t * number, long long value1, long long value2);
+extern  void assignValue_signed(sint128_t *, long long, long long);
 
-extern inline sint128_t valueOfLLs(long long value1, long long value2);
+extern  sint128_t valueOfLLs(long long, long long);
 
-extern inline long long toLL(const sint128_t * arg);
+extern  long long toLL(const sint128_t *);
 
-extern inline bool isLargerThan_signed(const sint128_t * arg1, const sint128_t * arg2);
+extern  bool isLargerThan_signed(const sint128_t *, const sint128_t *);
 
-extern inline bool isSmallerThan_signed(const sint128_t * arg1, const sint128_t * arg2);
+extern  bool isSmallerThan_signed(const sint128_t *, const sint128_t *);
 
-extern inline bool isLargerThanOrEqualTo_signed(const sint128_t * arg1, const sint128_t * arg2);
+extern  bool isLargerThanOrEqualTo_signed(const sint128_t *, const sint128_t *);
 
-extern inline bool isSmallerThanOrEqualTo_signed(const sint128_t * arg1, const sint128_t * arg2);
+extern  bool isSmallerThanOrEqualTo_signed(const sint128_t *, const sint128_t *);
 
-extern inline bool equals_signed(const sint128_t * arg1, const sint128_t * arg2);
+extern  bool equals_signed(const sint128_t *, const sint128_t *);
 
-extern inline bool notEquals_signed(const sint128_t * arg1, const sint128_t * arg2);
+extern  bool notEquals_signed(const sint128_t *, const sint128_t *);
 
-extern int compare_signed(const sint128_t * arg1, const sint128_t * arg2);
+extern int compare_signed(const sint128_t *, const sint128_t *);
 
-extern inline void setSubtractFirst_signed(sint128_t * arg1, const sint128_t * arg2);
+extern  void setSubtractFirst_signed(sint128_t *, const sint128_t *);
 
-extern inline void setSubtract_signed(sint128_t * diff, const sint128_t * arg1, const sint128_t * arg2);
+extern  void setSubtract_signed(sint128_t *, const sint128_t *, const sint128_t *);
 
-extern inline sint128_t subtract_signed(const sint128_t * arg1, const sint128_t * arg2);
+extern  sint128_t subtract_signed(const sint128_t *, const sint128_t *);
 
-extern inline void setShiftArg_signed(sint128_t * arg, int off);
+extern  void setShiftArg_signed(sint128_t *, int);
 
-extern inline void setShift_signed(sint128_t * shifted, const sint128_t * arg, int off);
+extern  void setShift_signed(sint128_t *, const sint128_t *, int);
 
-extern sint128_t shift_signed(const sint128_t * arg, int off);
+extern sint128_t shift_signed(const sint128_t *, int);
 
-extern inline void setRotate_signed(sint128_t * rot, const sint128_t * arg, int off);
+extern  void setRotate_signed(sint128_t *, const sint128_t *, int);
 
-extern inline void setRotateArg_signed(sint128_t * arg, int off);
+extern  void setRotateArg_signed(sint128_t *, int);
 
-extern sint128_t rotate_signed(const sint128_t * arg, int off);
+extern sint128_t rotate_signed(const sint128_t *, int);
 
-extern inline void setBWAnd_signed(sint128_t * and, const sint128_t * arg1, const sint128_t * arg2);
+extern void setBWAnd_signed(sint128_t *, const sint128_t *, const sint128_t *);
 
-extern  void setBWAndFirst_signed(sint128_t * arg1, const sint128_t * arg2);
+extern void setBWAndFirst_signed(sint128_t *, const sint128_t *);
 
-extern  sint128_t bwAnd_signed(const sint128_t * arg1, const sint128_t * arg2);
+extern sint128_t bwAnd_signed(const sint128_t *, const sint128_t *);
 
-extern inline void setBWOr_signed(sint128_t * or , const sint128_t * arg1, const sint128_t * arg2);
+extern void setBWOr_signed(sint128_t *, const sint128_t *, const sint128_t *);
 
-extern inline void setBWOrFirst_signed(sint128_t * arg1, const sint128_t * arg2);
+extern  void setBWOrFirst_signed(sint128_t *, const sint128_t *);
 
-extern inline sint128_t bwOr_signed(const sint128_t * arg1, const sint128_t * arg2);
+extern  sint128_t bwOr_signed(const sint128_t *, const sint128_t *);
 
-extern inline void setBWXor_signed(sint128_t * xor, const sint128_t * arg1, const sint128_t * arg2);
+extern  void setBWXor_signed(sint128_t *, const sint128_t *, const sint128_t *);
 
-extern inline void setBWXorFirst_signed(sint128_t * arg1, const sint128_t * arg2);
+extern  void setBWXorFirst_signed(sint128_t *, const sint128_t *);
 
-extern inline sint128_t bwXor_signed(const sint128_t * arg1, const sint128_t * arg2);
+extern  sint128_t bwXor_signed(const sint128_t *, const sint128_t *);
 
-extern inline bool isNegative(const sint128_t * arg);
+extern  bool isNegative(const sint128_t *);
 
-extern inline void setInvertBits_signed(sint128_t * inverted, const sint128_t * arg);
+extern  void setInvertBits_signed(sint128_t *, const sint128_t *);
 
-extern inline void setInvertBitsArg_signed(sint128_t * arg);
+extern  void setInvertBitsArg_signed(sint128_t *);
 
-extern inline sint128_t invertBits_signed(const sint128_t * arg);
+extern  sint128_t invertBits_signed(const sint128_t *);
 
-extern inline void setNegative(sint128_t * neg, const sint128_t * arg);
+extern  void setNegative(sint128_t *, const sint128_t *);
 
-extern inline void setNegativeArg(sint128_t * arg);
+extern  void setNegativeArg(sint128_t *);
 
-extern inline sint128_t negate(const sint128_t * arg);
+extern  sint128_t negate(const sint128_t *);
 
-extern void setAbs_128(sint128_t * abs, const sint128_t * arg);
+extern void setAbs_128(sint128_t *, const sint128_t *);
 
-extern void setAbsArg_128(sint128_t * arg);
+extern void setAbsArg_128(sint128_t *);
 
-extern inline void increment_signed(sint128_t * arg);
+extern  void increment_signed(sint128_t *);
 
-extern inline void decrement_signed(sint128_t * arg);
+extern  void decrement_signed(sint128_t *);
 
-extern inline sint128_t postIncrement_signed(sint128_t * arg);
+extern  sint128_t postIncrement_signed(sint128_t *);
 
-extern inline sint128_t preIncrement_signed(sint128_t * arg);
+extern  sint128_t preIncrement_signed(sint128_t *);
 
-extern inline sint128_t postDecrement_signed(sint128_t * arg);
+extern  sint128_t postDecrement_signed(sint128_t *);
 
-extern inline sint128_t preDecrement_signed(sint128_t * arg);
+extern  sint128_t preDecrement_signed(sint128_t *);
 
-extern inline sint128_t abs_128(const sint128_t * arg);
+extern  sint128_t abs_128(const sint128_t *);
 
-extern void setMultiply_signed(sint128_t * prod, const sint128_t * arg1, const sint128_t * arg2);
+extern void setMultiply_signed(sint128_t *, const sint128_t *, const sint128_t *);
 
-extern void setMultiplyFirst_signed(sint128_t * arg1, const sint128_t * arg2);
+extern void setMultiplyFirst_signed(sint128_t *, const sint128_t *);
 
-extern inline sint128_t multiply_signed(const sint128_t * arg1, const sint128_t * arg2);
+extern  sint128_t multiply_signed(const sint128_t *, const sint128_t *);
 
-/*extern void setDivide_signed(sint128_t * q, const sint128_t * arg1, const sint128_t * arg2);
+/*extern void setDivide_signed(sint128_t *, const sint128_t *, const sint128_t *);
 
-extern void setDivideFirst_signed(sint128_t * arg1, const sint128_t * arg2);
+extern void setDivideFirst_signed(sint128_t *, const sint128_t *);
 
-extern inline sint128_t divide_signed(const sint128_t * arg1, const sint128_t * arg2);*/
+extern  sint128_t divide_signed(const sint128_t *, const sint128_t *);*/
 
-extern inline sint128_t fibonacci_signed(unsigned int f);
+extern  sint128_t fibonacci_signed(unsigned int);
 
-extern inline sint128_t factorial_signed(unsigned int f);
+extern  sint128_t factorial_signed(unsigned int);
 
-extern inline unsigned int getBitLength_signed(const sint128_t * arg, bool twoscomplement);
+extern  unsigned int getBitLength_signed(const sint128_t *, bool);
 
-extern inline bool getDigit_signed(const sint128_t * arg, unsigned int d, bool twoscomplement);
+extern  bool getDigit_signed(const sint128_t *, unsigned int d, bool);
 
-extern char * toBinaryString_signed(const sint128_t * arg, bool twoscomplement);
+extern char * toBinaryString_signed(const sint128_t *, bool);
 
-extern inline void print_signed(const sint128_t * arg, bool twoscomplement, bool breakBefore, bool breakAfter);
+extern  void print_signed(const sint128_t *, bool, bool, bool);
 
-extern inline void printHex_signed(const sint128_t * arg, bool twoscomplement, bool breakBefore, bool breakAfter);
+extern  void printHex_signed(const sint128_t *, bool, bool, bool);
 
 #endif
