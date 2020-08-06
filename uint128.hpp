@@ -163,6 +163,14 @@ namespace extint {
 			printHex_unsigned(&this->v, 0, 1);
 		}
 	};
+	
+	static uint128 fibonacci(unsigned int f) {
+		return fibonacci_unsigned(f);
+	}
+	
+	static uint128 factorial(unsigned int f) {
+		return factorial_unsigned(f);
+	}
 }
 
 #endif
