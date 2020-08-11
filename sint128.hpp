@@ -2,7 +2,6 @@
 #define SINT128_HPP
 
 #include <string>
-// using the definitions of the operations from sint128.h to just call them in wrapper functions
 extern "C" {
 	#include "sint128.h"
 }
@@ -140,6 +139,14 @@ namespace extint {
 
 		sint128 operator~ () {
 			return invertBits_signed(&this->v);
+		}
+
+		bool getDigit(unsigned int index) {
+			return getDigit_signed(&this->v, index, false);
+		}
+
+		bool getDigit(unsigned int index, bool twoscomplement) {
+			return getDigit_signed(&this->v, index, twoscomplement);
 		}
 
 		string toBinaryString(bool twoscomplement) {

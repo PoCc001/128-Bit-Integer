@@ -143,6 +143,18 @@ namespace extint {
 			return invertBits_unsigned(&this->v);
 		}
 
+		unsigned int getBitLength() {
+			return getBitLength_unsigned(&this->v);
+		}
+
+		bool getDigit(unsigned int index) {
+			return getDigit_unsigned(&this->v, index);
+		}
+
+		void setDigit(unsigned int index, bool d) {
+			setDigitArg_unsigned(&this->v, index, d);
+		}
+
 		string toBinaryString() {
 			return toBinaryString_unsigned(&this->v);
 		}
@@ -163,12 +175,12 @@ namespace extint {
 			printHex_unsigned(&this->v, 0, 1);
 		}
 	};
-	
-	static uint128 fibonacci(unsigned int f) {
+
+	uint128 fibonacci(unsigned int f) {
 		return fibonacci_unsigned(f);
 	}
-	
-	static uint128 factorial(unsigned int f) {
+
+	uint128 factorial(unsigned int f) {
 		return factorial_unsigned(f);
 	}
 }

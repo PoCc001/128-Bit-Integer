@@ -453,7 +453,7 @@ inline void print_unsigned(const uint128_t * arg, bool breakBefore, bool breakAf
 		printf("\n");
 	}
 
-	printf(toBinaryString_unsigned(arg));
+	printf("%s", toBinaryString_unsigned(arg));
 
 	if (breakAfter) {
 		printf("\n");
@@ -549,6 +549,13 @@ inline void printHex_unsigned(const uint128_t * arg, bool breakBefore, bool brea
 
 	if (arg->value[1] != 0) {
 		printf("%llx", arg->value[1]);
+		unsigned int i = 63;
+		while ((arg->value[0] & (1ULL << i)) == 0) {
+			if ((63 - i) % 4 == 3) {
+				printf("0");
+			}
+			--i;
+		}
 	}
 	printf("%llx", arg->value[0]);
 

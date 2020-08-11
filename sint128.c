@@ -391,7 +391,7 @@ inline void print_signed(const sint128_t * arg, bool twoscomplement, bool breakB
 		printf("\n");
 	}
 
-	printf(toBinaryString_signed(arg, twoscomplement));
+	printf("%s", toBinaryString_signed(arg, twoscomplement));
 
 	if (breakAfter) {
 		printf("\n");
@@ -411,6 +411,13 @@ inline void printHex_signed(const sint128_t * arg, bool twoscomplement, bool bre
 		printf("-");
 		if (neg.value.value[1] != 0) {
 			printf("%llx", neg.value.value[1]);
+			unsigned int i = 64;
+			while ((neg.value.value[0] & (1ULL << i)) == 0) {
+				if ((63 - i) % 4 == 3) {
+					printf("0");
+				}
+				--i;
+			}
 		}
 		printf("%llx", neg.value.value[0]);
 	}
