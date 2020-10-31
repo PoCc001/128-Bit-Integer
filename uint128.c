@@ -372,28 +372,15 @@ inline unsigned int getBitLength_unsigned(const uint128_t * arg) {
 }
 
 void setMultiply_unsigned(uint128_t * prod, const uint128_t * arg1, const uint128_t * arg2) {
-	unsigned int l1 = getBitLength_unsigned(arg1);
-	unsigned int l2 = getBitLength_unsigned(arg2);
-	if (l1 >= l2) {
-		*prod = valueOfULLs(0, 0);
-		uint128_t doubles = *arg1;
-		for (unsigned int i = 0; i < l2; ++i) {
-			if (getDigit_unsigned(arg2, i)) {
-				setAddFirst_unsigned(prod, &doubles);
-			}
-			setShiftOneLeftArg_unsigned(&doubles);
-		}
-	}
-	else {
-		*prod = valueOfULLs(0, 0);
-		uint128_t doubles = *arg2;
-		for (unsigned int i = 0; i < l1; ++i) {
-			if (getDigit_unsigned(arg1, i)) {
-				setAddFirst_unsigned(prod, arg2);
-			}
-			setShiftOneLeftArg_unsigned(&doubles);
-		}
-	}
+	unsigned int arg1Value[4] = {(unsigned int)arg1->value[0], (unsigned int)(arg1-value[0] >> 32), (unsigned int)arg1->value[1], (unsigned int)(arg1->value[1] >> 32)};
+	unsigned int arg2Value[4] = {(unsigned int)arg2->value[0], (unsigned int)(arg2-value[0] >> 32), (unsigned int)arg2->value[1], (unsigned int)(arg2->value[1] >> 32)};
+	unsigned long long two96 = ((unsigned long long)(arg1Value[3]) * (unsigned long long)(arg2Value[0]) + (unsigned long long)(arg1Value[2]) * (unsigned long long)(arg2Value[1])) << 32;
+	unsigned long long two64 = (unsigned long long)(arg1Value[2]) * (unsigned long long)(arg2Value[0]) + (unsigned long long)(arg1Value[1]) * (unsigned long long)(arg2Value[1]) + (unsigned long long)(arg1Value[0]) * (unsigned long long)(arg2Value[2]);
+	unsigned long long two32 = ((unsigned long long)(arg1Value[1]) * (unsigned long long)(arg2Value[0]) + (unsigned long long)(arg1Value[0]) * (unsigned long long)(arg2Value[1])) << 32;
+	prod->value[0] = (unsigned long long)(arg1Value[0]) * (unsigned long long)(arg2Value[0]);
+	prod->value[1] = two64 + two96;
+	unsigned long long added = prod->value[0] + two32;
+	prod->value[0] += added < prod->value[0];
 }
 
 void setMultiplyFirst_unsigned(uint128_t * arg1, const uint128_t * arg2) {
