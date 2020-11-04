@@ -53,18 +53,18 @@ inline uint128_t preDecrement_unsigned(uint128_t * arg) {
 	return *arg;
 }
 
-inline void assignValue_unsigned(uint128_t * number, unsigned long long value1, unsigned long long value2) {
+inline void assignValue_unsigned(uint128_t * number, uint64_t value1, uint64_t value2) {
 	number->value[0] = value1;
 	number->value[1] = value2;
 }
 
-inline uint128_t valueOfULLs(unsigned long long value1, unsigned long long value2) {
+inline uint128_t valueOfui64s(uint64_t value1, uint64_t value2) {
 	uint128_t number;
 	assignValue_unsigned(&number, value1, value2);
 	return number;
 }
 
-inline unsigned long long toULL(const uint128_t * arg) {
+inline uint64_t toui64(const uint128_t * arg) {
 	return arg->value[0];
 }
 
@@ -226,7 +226,7 @@ inline static void setRotateOneLeftArg_unsigned(uint128_t * arg) {
 inline static void setRotateOneRightArg_unsigned(uint128_t * arg) {
 	bool odd = arg->value[0] & 1;
 	setShiftOneRightArg_unsigned(arg);
-	arg->value[1] |= (unsigned long long)(odd) << 63;
+	arg->value[1] |= (uint64_t)(odd) << 63;
 }
 
 inline void setRotate_unsigned(uint128_t * rot, const uint128_t * arg, int off) {
@@ -372,26 +372,26 @@ inline unsigned int getBitLength_unsigned(const uint128_t * arg) {
 }
 
 void setMultiply_unsigned(uint128_t * prod, const uint128_t * arg1, const uint128_t * arg2) {
-	unsigned int arg1Value[4] = {(unsigned int)arg1->value[0], (unsigned int)(arg1-value[0] >> 32), (unsigned int)arg1->value[1], (unsigned int)(arg1->value[1] >> 32)};
-	unsigned int arg2Value[4] = {(unsigned int)arg2->value[0], (unsigned int)(arg2-value[0] >> 32), (unsigned int)arg2->value[1], (unsigned int)(arg2->value[1] >> 32)};
-	unsigned long long two96 = ((unsigned long long)(arg1Value[3]) * (unsigned long long)(arg2Value[0]) + (unsigned long long)(arg1Value[2]) * (unsigned long long)(arg2Value[1])) << 32;
-	unsigned long long two64 = (unsigned long long)(arg1Value[2]) * (unsigned long long)(arg2Value[0]) + (unsigned long long)(arg1Value[1]) * (unsigned long long)(arg2Value[1]) + (unsigned long long)(arg1Value[0]) * (unsigned long long)(arg2Value[2]);
-	unsigned long long two32 = ((unsigned long long)(arg1Value[1]) * (unsigned long long)(arg2Value[0]) + (unsigned long long)(arg1Value[0]) * (unsigned long long)(arg2Value[1]));
-	prod->value[0] = (unsigned long long)(arg1Value[0]) * (unsigned long long)(arg2Value[0]);
+	uint32_t arg1Value[4] = {(uint32_t)arg1->value[0], (uint32_t)(arg1-value[0] >> 32), (uint32_t)arg1->value[1], (uint32_t)(arg1->value[1] >> 32)};
+	uint32_t arg2Value[4] = {(uint32_t)arg2->value[0], (uint32_t)(arg2-value[0] >> 32), (uint32_t)arg2->value[1], (uint32_t)(arg2->value[1] >> 32)};
+	uint64_t two96 = ((uint64_t)(arg1Value[3]) * (uint64_t)(arg2Value[0]) + (uint64_t)(arg1Value[2]) * (uint64_t)(arg2Value[1])) << 32;
+	uint64_t two64 = (uint64_t)(arg1Value[2]) * (uint64_t)(arg2Value[0]) + (uint64_t)(arg1Value[1]) * (uint64_t)(arg2Value[1]) + (uint64_t)(arg1Value[0]) * (uint64_t)(arg2Value[2]);
+	uint64_t two32 = ((uint64_t)(arg1Value[1]) * (uint64_t)(arg2Value[0]) + (uint64_t)(arg1Value[0]) * (uint64_t)(arg2Value[1]));
+	prod->value[0] = (uint64_t)(arg1Value[0]) * (uint64_t)(arg2Value[0]);
 	prod->value[1] = two64 + two96 + (two32 >> 32);
-	unsigned long long added = prod->value[0] + (two32 << 32);
+	uint64_t added = prod->value[0] + (two32 << 32);
 	prod->value[0] += added < prod->value[0];
 }
 
 void setMultiplyFirst_unsigned(uint128_t * arg1, const uint128_t * arg2) {
-	unsigned int arg1Value[4] = {(unsigned int)arg1->value[0], (unsigned int)(arg1-value[0] >> 32), (unsigned int)arg1->value[1], (unsigned int)(arg1->value[1] >> 32)};
-	unsigned int arg2Value[4] = {(unsigned int)arg2->value[0], (unsigned int)(arg2-value[0] >> 32), (unsigned int)arg2->value[1], (unsigned int)(arg2->value[1] >> 32)};
-	unsigned long long two96 = ((unsigned long long)(arg1Value[3]) * (unsigned long long)(arg2Value[0]) + (unsigned long long)(arg1Value[2]) * (unsigned long long)(arg2Value[1])) << 32;
-	unsigned long long two64 = (unsigned long long)(arg1Value[2]) * (unsigned long long)(arg2Value[0]) + (unsigned long long)(arg1Value[1]) * (unsigned long long)(arg2Value[1]) + (unsigned long long)(arg1Value[0]) * (unsigned long long)(arg2Value[2]);
-	unsigned long long two32 = ((unsigned long long)(arg1Value[1]) * (unsigned long long)(arg2Value[0]) + (unsigned long long)(arg1Value[0]) * (unsigned long long)(arg2Value[1]));
-	arg1->value[0] = (unsigned long long)(arg1Value[0]) * (unsigned long long)(arg2Value[0]);
+	uint32_t arg1Value[4] = {(uint32_t)arg1->value[0], (uint32_t)(arg1-value[0] >> 32), (uint32_t)arg1->value[1], (uint32_t)(arg1->value[1] >> 32)};
+	uint32_t arg2Value[4] = {(uint32_t)arg2->value[0], (uint32_t)(arg2-value[0] >> 32), (uint32_t)arg2->value[1], (uint32_t)(arg2->value[1] >> 32)};
+	uint64_t two96 = ((uint64_t)(arg1Value[3]) * (uint64_t)(arg2Value[0]) + (uint64_t)(arg1Value[2]) * (uint64_t)(arg2Value[1])) << 32;
+	uint64_t two64 = (uint64_t)(arg1Value[2]) * (uint64_t)(arg2Value[0]) + (uint64_t)(arg1Value[1]) * (uint64_t)(arg2Value[1]) + (uint64_t)(arg1Value[0]) * (uint64_t)(arg2Value[2]);
+	uint64_t two32 = ((uint64_t)(arg1Value[1]) * (uint64_t)(arg2Value[0]) + (uint64_t)(arg1Value[0]) * (uint64_t)(arg2Value[1]));
+	arg1->value[0] = (uint64_t)(arg1Value[0]) * (uint64_t)(arg2Value[0]);
 	arg1->value[1] = two64 + two96 + (two32 >> 32);
-	unsigned long long added = arg1->value[0] + (two32 << 32);
+	uint64_t added = arg1->value[0] + (two32 << 32);
 	arg1->value[0] += added < arg1->value[0];
 }
 
