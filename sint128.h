@@ -3,10 +3,13 @@
 
 #include "uint128.h"
 #include <stdbool.h>
+#include <inttypes.h>
 
 typedef struct {
 	uint128_t value;
 } sint128_t;
+
+typedef sint128_t int128_t;
 
 extern void setAddFirst_signed(sint128_t *, const sint128_t *);
 
@@ -14,11 +17,11 @@ extern void setAdd_signed(sint128_t *, const sint128_t *, const sint128_t *);
 
 extern sint128_t add_signed(const sint128_t *, const sint128_t *);
 
-extern void assignValue_signed(sint128_t *, long long, long long);
+extern void assignValue_signed(sint128_t *, int64_t, int64_t);
 
-extern sint128_t valueOfLLs(long long, long long);
+extern sint128_t valueOfi64s(int64_t, int64_t);
 
-extern long long toLL(const sint128_t *);
+extern int64_t toi64(const sint128_t *);
 
 extern bool isLargerThan_signed(const sint128_t *, const sint128_t *);
 
