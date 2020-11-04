@@ -2,6 +2,7 @@
 #define UINT128_H
 
 #include <stdbool.h>
+#include <inttypes.h>
 
 typedef struct {
 	unsigned long long value[2];
