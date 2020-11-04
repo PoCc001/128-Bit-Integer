@@ -23,12 +23,12 @@ namespace extint {
 			v = valueOfULLs(0, 0);
 		}
 
-		uint128(unsigned long long value) {
-			v = valueOfULLs(value, 0);
+		uint128(uint64_t value) {
+			v = valueOfui64s(value, 0);
 		}
 
-		uint128(unsigned long long value1, unsigned long long value2) {
-			v = valueOfULLs(value1, value2);
+		uint128(uint64_t value1, uint64_t value2) {
+			v = valueOfui64s(value1, value2);
 		}
 
 		void operator+= (const uint128 &arg) {
