@@ -18,18 +18,18 @@ inline sint128_t add_signed(const sint128_t * arg1, const sint128_t * arg2) {
 	return sum;
 }
 
-inline void assignValue_signed(sint128_t * number, long long value1, long long value2) {
-	assignValue_unsigned(&number->value, (unsigned long long)(value1), (unsigned long long)(value2));
+inline void assignValue_signed(sint128_t * number, int64_t value1, int64_t value2) {
+	assignValue_unsigned(&number->value, (uint64_t)(value1), (uint64_t)(value2));
 }
 
-inline sint128_t valueOfLLs(long long value1, long long value2) {
+inline sint128_t valueOfi64s(int64_t value1, int64_t value2) {
 	sint128_t new_number;
 	assignValue_signed(&new_number, value1, value2);
 	return new_number;
 }
 
-inline long long toLL(const sint128_t * arg) {
-	return (long long)(arg->value.value[0]);
+inline int64_t toi64(const sint128_t * arg) {
+	return (int64_t)(arg->value.value[0]);
 }
 
 inline static bool lastBit(const sint128_t * arg) {
@@ -37,7 +37,7 @@ inline static bool lastBit(const sint128_t * arg) {
 }
 
 inline bool isLargerThan_signed(const sint128_t * arg1, const sint128_t * arg2) {
-	if ((long long)(arg1->value.value[1]) > (long long)(arg2->value.value[1])) {
+	if ((int64_t)(arg1->value.value[1]) > (int64_t)(arg2->value.value[1])) {
 		return 1;
 	}
 	else if (arg1->value.value[1] == arg2->value.value[1] && arg1->value.value[0] > arg2->value.value[0]) {
@@ -49,7 +49,7 @@ inline bool isLargerThan_signed(const sint128_t * arg1, const sint128_t * arg2) 
 }
 
 inline bool isSmallerThan_signed(const sint128_t * arg1, const sint128_t * arg2) {
-	if ((long long)(arg1->value.value[1]) < (long long)(arg2->value.value[1])) {
+	if ((int64_t)(arg1->value.value[1]) < (int64_t)(arg2->value.value[1])) {
 		return 1;
 	}
 	else if (arg1->value.value[1] == arg2->value.value[1] && arg1->value.value[0] < arg2->value.value[0]) {
@@ -105,12 +105,12 @@ inline sint128_t subtract_signed(const sint128_t * arg1, const sint128_t * arg2)
 inline void setShiftArg_signed(sint128_t * arg, int off) {
 	bool isNeg = isNegative(arg);
 	setShiftArg_unsigned(&arg->value, off);
-	arg->value.value[1] |= (unsigned long long)(isNeg) << 63;
+	arg->value.value[1] |= (uint64_t)(isNeg) << 63;
 }
 
 inline void setShift_signed(sint128_t * shifted, const sint128_t * arg, int off) {
 	setShift_unsigned(&shifted->value, &arg->value, off);
-	shifted->value.value[1] |= (unsigned long long)(isNegative(arg)) << 63;
+	shifted->value.value[1] |= (uint64_t)(isNegative(arg)) << 63;
 }
 
 sint128_t shift_signed(const sint128_t * arg, int off) {
