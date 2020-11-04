@@ -21,12 +21,12 @@ namespace extint {
 			v = valueOfLLs(0, 0);
 		}
 
-		sint128(long long value) {
-			v = valueOfLLs(value, 0);
+		sint128(int64_t value) {
+			v = valueOfi64s(value, 0);
 		}
 
-		sint128(long long value1, long long value2) {
-			v = valueOfLLs(value1, value2);
+		sint128(int64_t value1, int64_t value2) {
+			v = valueOfi64s(value1, value2);
 		}
 
 		void operator+= (const sint128 &arg) {
@@ -181,6 +181,8 @@ namespace extint {
 			printHex_signed(&this->v, 0, 0, 1);
 		}
 	};
+	
+	typedef sint128 int128;
 }
 
 #endif
