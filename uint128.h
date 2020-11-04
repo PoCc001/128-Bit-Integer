@@ -5,7 +5,7 @@
 #include <inttypes.h>
 
 typedef struct {
-	unsigned long long value[2];
+	uint64_t value[2];
 } uint128_t;
 
 extern void setAddFirst_unsigned(uint128_t *, const uint128_t *);
@@ -26,11 +26,11 @@ extern uint128_t postDecrement_unsigned(uint128_t *);
 
 extern uint128_t preDecrement_unsigned(uint128_t *);
 
-extern void assignValue_unsigned(uint128_t *, unsigned long long, unsigned long long);
+extern void assignValue_unsigned(uint128_t *, uint64_t, uint64_t);
 
-extern uint128_t valueOfULLs(unsigned long long, unsigned long long);
+extern uint128_t valueOfui64s(uint64_t, uint64_t);
 
-extern unsigned long long toULL(const uint128_t *);
+extern uint64_t toui64(const uint128_t *);
 
 extern bool isLargerThan_unsigned(const uint128_t *, const uint128_t *);
 
