@@ -183,7 +183,7 @@ void setShiftArg_unsigned(uint128_t * arg, int off) {
 		if (off < 64) {
 			uint64_t right_mask = (1ULL << off) - 1;
 			arg->value[0] >>= off;
-			arg->value[0] |= (arg->value[1] & right_mask) << off;
+			arg->value[0] |= (arg->value[1] & right_mask) << (64 - off);
 			arg->value[1] >>= off;
 		}
 		else {
@@ -225,7 +225,7 @@ inline void setShift_unsigned(uint128_t * shifted, const uint128_t * arg, int of
 		if (off < 64) {
 			uint64_t right_mask = (1ULL << off) - 1;
 			shifted->value[0] = arg->value[0] >> off;
-			shifted->value[0] = arg->value[0] | ((arg->value[1] & right_mask) << off);
+			shifted->value[0] = arg->value[0] | ((arg->value[1] & right_mask) << (64 - off));
 			shifted->value[1] = arg->value[1] >> off;
 		}
 		else {
