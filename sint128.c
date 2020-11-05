@@ -103,9 +103,26 @@ inline sint128_t subtract_signed(const sint128_t * arg1, const sint128_t * arg2)
 }
 
 inline void setShiftArg_signed(sint128_t * arg, int off) {
-	bool isNeg = isNegative(arg);
-	setShiftArg_unsigned(&arg->value, off);
-	arg->value.value[1] |= (uint64_t)(isNeg) << 63;
+	if (off >= 0) {
+		setShiftArg_unsigned(&arg->value, off);
+	} else {
+		off = -off;
+		bool negative = isNegative(arg);
+		if (off < 64) {
+			uint64_t right_mask = (1LL << off) - 1;
+			arg->value.value[0] >>= off;
+			arg->value.value[0] |= (arg->value.value[1] & right_mask) << (64 - off);
+			arg->value.value[1] >>= off;
+		}
+		else {
+			off &= 0x3f;
+			arg->value.value[0] = arg->value.value[1];
+			arg->value.value[1] = 0ULL;
+			arg->value.value[0] >>= off;
+			
+		}
+		arg->value.value[1] |= ~(((uint64_t)(negative) << (64 - off)) - 1);
+	}
 }
 
 inline void setShift_signed(sint128_t * shifted, const sint128_t * arg, int off) {
