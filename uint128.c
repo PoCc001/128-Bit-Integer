@@ -154,24 +154,43 @@ inline static void setShiftOneRight_unsigned(uint128_t * shifted, const uint128_
 	}
 }
 
-inline void setShiftArg_unsigned(uint128_t * arg, int off) {
+void setShiftArg_unsigned(uint128_t * arg, int off) {
 	if (off == 0) {
 		return;
 	}
 	else if (off > 128 || off < -128) {
-		arg->value[0] = 0;
-		arg->value[1] = 0;
+		arg->value[0] = 0ULL;
+		arg->value[1] = 0ULL;
 		return;
 	}
 
 	if (off > 0) {
-		for (int i = 0; i < off; ++i) {
-			setShiftOneLeftArg_unsigned(arg);
+		if (off < 64) {
+			uint64_t left_mask = ~((1ULL << off) - 1);
+			arg->value[1] <<= off;
+			arg->value[1] |= (arg->value[0] & left_mask) >> off;
+			arg->value[0] <<= off;
+		}
+		else {
+			off &= 0x3f;
+			arg->value[1] = arg->value[0];
+			arg->value[0] = 0ULL;
+			arg->value[1] <<= off;
 		}
 	}
 	else {
-		for (int i = 0; i < off; ++i) {
-			setShiftOneRightArg_unsigned(arg);
+		off = -off;
+		if (off < 64) {
+			uint64_t right_mask = (1ULL << off) - 1;
+			arg->value[0] >>= off;
+			arg->value[0] |= (arg->value[1] & right_mask) << off;
+			arg->value[1] >>= off;
+		}
+		else {
+			off &= 0x3f;
+			arg->value[0] = arg->value[1];
+			arg->value[1] = 0ULL;
+			arg->value[0] >>= off;
 		}
 	}
 }
@@ -188,15 +207,32 @@ inline void setShift_unsigned(uint128_t * shifted, const uint128_t * arg, int of
 	}
 
 	if (off > 0) {
-		setShiftOneLeft_unsigned(shifted, arg);
-		for (int i = 1; i < off; ++i) {
-			setShiftOneLeftArg_unsigned(shifted);
+		if (off < 64) {
+			uint64_t left_mask = ~((1ULL << off) - 1);
+			shifted->value[1] = arg->value[1] << off;
+			shifted->value[1] = arg->value[1] | ((arg->value[0] & left_mask) >> off);
+			shifted->value[0] = arg->value[0] << off;
+		}
+		else {
+			off &= 0x3f;
+			shifted->value[1] = arg->value[0];
+			shifted->value[0] = 0ULL;
+			shifted->value[1] <<= off;
 		}
 	}
 	else {
-		setShiftOneRight_unsigned(shifted, arg);
-		for (int i = 1; i < off; ++i) {
-			setShiftOneRightArg_unsigned(shifted);
+		off = -off;
+		if (off < 64) {
+			uint64_t right_mask = (1ULL << off) - 1;
+			shifted->value[0] = arg->value[0] >> off;
+			shifted->value[0] = arg->value[0] | ((arg->value[1] & right_mask) << off);
+			shifted->value[1] = arg->value[1] >> off;
+		}
+		else {
+			off &= 0x3f;
+			shifted->value[0] = arg->value[1];
+			shifted->value[1] = 0ULL;
+			shifted->value[0] >>= off;
 		}
 	}
 }
