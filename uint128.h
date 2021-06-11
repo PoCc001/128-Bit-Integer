@@ -8,6 +8,8 @@ typedef struct {
 	uint64_t value[2];
 } uint128_t;
 
+typedef uint128_t* uint128_ptr_t;
+
 extern void setAddFirst_unsigned(uint128_t *, const uint128_t *);
 
 extern void setAdd_unsigned(uint128_t *, const uint128_t *, const uint128_t *);
