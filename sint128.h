@@ -9,6 +9,8 @@ typedef struct {
 	uint128_t value;
 } sint128_t;
 
+typedef sint128_t* sint128_ptr_t;
+
 typedef sint128_t int128_t;
 
 extern void setAddFirst_signed(sint128_t *, const sint128_t *);
