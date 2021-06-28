@@ -7,7 +7,6 @@
 extern "C" {
 	#include "uint128.h"
 }
-using namespace std;
 
 namespace extint {
 	class uint128 {
@@ -155,7 +154,7 @@ namespace extint {
 			setDigitArg_unsigned(&this->v, index, d);
 		}
 
-		string toBinaryString() {
+		std::string toBinaryString() {
 			return toBinaryString_unsigned(&this->v);
 		}
 
