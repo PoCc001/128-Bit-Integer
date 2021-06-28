@@ -5,7 +5,6 @@
 extern "C" {
 	#include "sint128.h"
 }
-using namespace std;
 
 namespace extint {
 	class sint128 {
@@ -149,11 +148,11 @@ namespace extint {
 			return getDigit_signed(&this->v, index, twoscomplement);
 		}
 
-		string toBinaryString(bool twoscomplement) {
+		std::string toBinaryString(bool twoscomplement) {
 			return toBinaryString_signed(&this->v, twoscomplement);
 		}
 
-		string toBinaryString() {
+		std::string toBinaryString() {
 			return toBinaryString_signed(&this->v, 0);
 		}
 
